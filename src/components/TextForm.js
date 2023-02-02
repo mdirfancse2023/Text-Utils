@@ -43,7 +43,7 @@ export default function TextForm(props) {
             placeholder="Start Typing"
           ></textarea>
         </div>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center flex-wrap">
           <button className="btn btn-primary mx-3" onClick={upperCase}>
             Convert To Uppercase
           </button>
