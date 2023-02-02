@@ -17,7 +17,7 @@ export default function TextForm(props) {
   const textRead = () => {
     var msg = new SpeechSynthesisUtterance();
     var voices = window.speechSynthesis.getVoices();
-    msg.voice = voices[4];
+    msg.voice = voices[3];
     msg.text = text;
     window.speechSynthesis.speak(msg);
   };
