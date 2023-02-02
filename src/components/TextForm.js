@@ -64,7 +64,7 @@ export default function TextForm(props) {
           </button>
         </div>
       </div>
-      <div className="my-5">
+      <div className="my-3">
         <h6 className="d-flex justify-content-center">Your text Summary</h6>
         <p className="d-flex justify-content-center">
           {" "}
