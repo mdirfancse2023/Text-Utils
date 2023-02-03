@@ -9,6 +9,8 @@ export default function TextForm(props) {
     setText(text.toLowerCase());
   };
   const textCopy = () => {
+    const textbox = document.getElementById('textbox');
+    textbox.select();
     navigator.clipboard.writeText(text);
   };
   const textClear = () => {
@@ -17,10 +19,13 @@ export default function TextForm(props) {
   const textRead = () => {
     var msg = new SpeechSynthesisUtterance();
     var voices = window.speechSynthesis.getVoices();
-    msg.voice = voices[3];
+    msg.voice = voices[4];
     msg.text = text;
     window.speechSynthesis.speak(msg);
   };
+  const removeSpace = ()=>{
+    setText(text.replace(/\s+/g,' ').trim());
+  }
   const onChange = (event) => {
     setText(event.target.value);
   };
@@ -32,11 +37,11 @@ export default function TextForm(props) {
             htmlFor="exampleFormControlTextarea1"
             className="form-label d-flex justify-content-center"
           >
-            <h3>{props.text}</h3>
+            <h3 className={`text-${props.tmode}`}>{props.text}</h3>
           </label>
           <textarea
-            className="form-control"
-            id="exampleFormControlTextarea1"
+            className={`form-control bg-${props.mode} text-${props.tmode}`}
+            id="textbox"
             rows="4"
             value={text}
             onChange={onChange}
@@ -44,44 +49,47 @@ export default function TextForm(props) {
           ></textarea>
         </div>
         <div className="d-flex justify-content-center flex-wrap">
-          <button className="btn btn-primary mx-3" onClick={upperCase}>
+          <button className={`btn btn-primary mx-3 my-1 text-${props.tmode}`} onClick={upperCase}>
             Convert To Uppercase
           </button>
-          <button className="btn btn-success mx-3" onClick={lowerCase}>
-            Convert To Lowercase
-          </button>
-          <button className="btn btn-info text-light mx-3" onClick={textCopy}>
-            Copy To Clipboard
-          </button>
-          <button className="btn btn-danger mx-3" onClick={textClear}>
+          <button className={`btn btn-danger mx-3 my-1 text-${props.tmode}`} onClick={textClear}>
             Clear This Text
           </button>
+          <button className={`btn btn-info text-${props.tmode} mx-3 my-1`} onClick={textCopy}>
+            Copy To Clipboard
+          </button>
           <button
-            className="btn btn-warning mx-3 text-light"
+            className={`btn btn-warning mx-3 my-1 text-${props.tmode}`} 
             onClick={textRead}
           >
             Click To Read
           </button>
+          <button className={`btn btn-success mx-3 my-1 text-${props.tmode}`} onClick={lowerCase}>
+            Convert To Lowercase
+          </button>
+          <button className={`btn btn-primary mx-3 my-1 text-${props.tmode}`} onClick={removeSpace}>
+            Remove Extra Spaces
+          </button>
         </div>
       </div>
       <div className="my-3">
-        <h6 className="d-flex justify-content-center">Your text Summary</h6>
-        <p className="d-flex justify-content-center">
+        <h6 className={`d-flex justify-content-center text-${props.tmode}`}>Your text Summary</h6>
+        <p className={`d-flex justify-content-center text-${props.tmode}`}>
           {" "}
           No of Words : {text.length}
         </p>
-        <p className="d-flex justify-content-center">
+        <p className={`d-flex justify-content-center text-${props.tmode}`}>
           {" "}
           No of Chracters : {text.split(" ").length}
         </p>
-        <p className="d-flex justify-content-center">
+        <p className={`d-flex justify-content-center text-${props.tmode}`}>
           {" "}
           No of Minutes to read : {0.008 * text.split(" ").length}
         </p>
       </div>
       <div className="container">
-        <h6 className="d-flex justify-content-center">Preview</h6>
-        <p className="d-flex justify-content-center">{text}</p>
+        <h6 className={`d-flex justify-content-center text-${props.tmode}`}>Preview</h6>
+        <p className={`d-flex justify-content-center text-${props.tmode}`}>{text.length>0?text:"Enter Text in the Textbox To Preview Here"}</p>
       </div>
     </>
   );

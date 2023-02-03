@@ -1,10 +1,11 @@
 import React from "react";
 
-export default function Footer() {
+import PropTypes from "prop-types";
+export default function Footer(props) {
   return (
-    <footer className="text-center bg-body-tertiary fixed-bottom">
+    <footer className={`text-center bg-${props.mode} fixed-bottom`}>
       <div
-        className="text-center p-3">
+        className={`text-center p-3 text-${props.tmode}`}>
         © 2023 Copyright : Md Irfan
       </div>
     </footer>
